@@ -15,7 +15,7 @@ server.use(express.json())
 // the second argument passed to the .post() method is the "Route Handler Function"
 // the route handler function will run on every POST request to "/api/users"
 // creates a user using the info sent inside the req body
-server.post('/api/users', (req, res) => {
+server.post('/api/users', async (req, res) => {
   // express will pass the request and response objects to this function
   // the .send() on the response object can be used to send a response to the client
   const { name, bio } = req.body
@@ -25,9 +25,9 @@ server.post('/api/users', (req, res) => {
         errorMessage: "Please provide name and bio for the user."
       })
     } else {
-      const createdUser = db.insert({ name, bio })
+      await db.insert({ name, bio })
       res.status(201).json({
-        data: createdUser,
+        data: { name, bio },
       })
     }
   } catch (err) {
@@ -38,8 +38,15 @@ server.post('/api/users', (req, res) => {
 });
 
 // returns an array of all the user objects contained in the db
-server.get('/api/users', (req, res) => {
-
+server.get('/api/users', async (req, res) => {
+  try {
+    const users = await db.find()
+    res.json({users})
+  } catch (err) {
+    res.status(500).json({
+      error: "The users information could not be retrieved."
+    })
+  }
 });
 
 // returns the user object with the specified id
