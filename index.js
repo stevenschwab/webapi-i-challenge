@@ -31,7 +31,9 @@ server.post('/api/users', (req, res) => {
       })
     }
   } catch (err) {
-
+    res.status(500).json({
+      error: "There was an error while saving the user to the database."
+    })
   }
 });
 
