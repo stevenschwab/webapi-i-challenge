@@ -50,8 +50,22 @@ server.get('/api/users', async (req, res) => {
 });
 
 // returns the user object with the specified id
-server.get('/api/users/:id', (req, res) => {
-
+server.get('/api/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const user = await db.findById(id)
+    if (!user) {
+      res.status(404).json({
+        message: "The user with the specified ID does not exist."
+      })
+    } else {
+      res.json({user})
+    }
+  } catch (err) {
+    res.status(500).json({
+      error: "The user information could not be retrieved."
+    })
+  }
 });
 
 // removes the user with the specified id and returns the deleted user
