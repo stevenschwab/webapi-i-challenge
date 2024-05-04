@@ -92,8 +92,29 @@ server.delete('/api/users/:id', async (req, res) => {
 
 // updates the user with the specified id using data from the req body
 // returns the modified document, not the original
-server.put('/api/users/:id', (req, res) => {
-
+server.put('/api/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const { name, bio } = req.body
+    if (!name || !bio) {
+      res.status(400).json({
+        errorMessage: "Please provide name and bio for the user."
+      })
+    } else {
+      const updatedUser = await db.update(id, { name, bio })
+      if (!updatedUser) {
+        res.status(404).json({
+          message: "The user with the specified ID does not exist."
+        })
+      } else {
+        res.json({updatedUser})
+      }
+    }
+  } catch (err) {
+    res.status(500).json({
+      error: "The user information could not be modified."
+    })
+  }
 });
 
 // once the server is fully configured we can have it "listen" for connections on a particular "port"
