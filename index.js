@@ -9,6 +9,8 @@ const server = express();
 
 // global middleware
 server.use(express.json())
+// enable cors
+server.use(cors())
 
 // endpoints
 // configures our server to execute a function for every POST request to "/api/users"
