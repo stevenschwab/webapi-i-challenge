@@ -25,10 +25,9 @@ server.post('/api/users', async (req, res) => {
         errorMessage: "Please provide name and bio for the user."
       })
     } else {
-      await db.insert({ name, bio })
-      res.status(201).json({
-        data: { name, bio },
-      })
+      const { id } = await db.insert({ name, bio })
+      const user = await db.findById(id)
+      res.status(201).json({user})
     }
   } catch (err) {
     res.status(500).json({
@@ -72,12 +71,13 @@ server.get('/api/users/:id', async (req, res) => {
 server.delete('/api/users/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const deletedUser = await db.remove(id)
-    if (!deletedUser) {
+    const deletedUserId = await db.remove(id)
+    if (!deletedUserId) {
       res.status(404).json({
         message: "The user with the specified ID does not exist."
       })
     } else {
+      const deletedUser = await db.findById(deletedUserId)
       res.json({
         message: "User deleted.",
         data: deletedUser,
@@ -107,6 +107,7 @@ server.put('/api/users/:id', async (req, res) => {
           message: "The user with the specified ID does not exist."
         })
       } else {
+        const updatedUser = await db.findById(id)
         res.json({updatedUser})
       }
     }
