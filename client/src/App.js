@@ -4,7 +4,7 @@ import axios from 'axios';
 const initialFormValues = {
   name: '',
   bio: '',
-}
+};
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -29,6 +29,10 @@ function App() {
       .catch(err => {
         console.error('Error deleting user', err.message);
       });
+  };
+
+  const handleInputChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   return (
