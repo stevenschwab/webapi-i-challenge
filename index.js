@@ -1,6 +1,7 @@
 // implement API here
 // require the express npm module, needs to be added to the project using "npm install express"
 const express = require('express');
+const cors = require('cors');
 // require db file and use its methods to get data
 const db = require('./data/db')
 
