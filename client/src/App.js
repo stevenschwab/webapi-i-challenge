@@ -66,7 +66,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='container'>
       <h1>Users List</h1>
       <ul>
         {users.map(({id, name, bio}) => (
