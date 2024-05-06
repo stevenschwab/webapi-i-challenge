@@ -66,6 +66,24 @@ h1 {
   transition: all 0.2s ease;
 }
 
+.edit-btn {
+  background-color: #f0ad4e;
+  color: #ffffff;
+}
+
+.edit-btn:hover {
+  background-color: #ec971f;
+}
+
+.delete-btn {
+  background-color: #d9534f;
+  color: #ffffff;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}
+
 /* Form Styles */
 .user-form {
   display: flex;
