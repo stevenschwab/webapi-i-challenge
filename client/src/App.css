@@ -45,6 +45,14 @@ h1 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.user-item:hover {
+  background-color: #e8e8e8;
+}
+
+.user-info {
+  font-size: 18px;
+}
+
 /* Form Styles */
 .user-form {
   display: flex;
