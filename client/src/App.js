@@ -12,7 +12,6 @@ function App() {
   const [editId, setEditId] = useState(null);
 
   useEffect(() => {
-    // Fetch users from the server
     axios.get('http://localhost:8000/api/users')
       .then(res => {
         setUsers(res.data.users);
@@ -60,6 +59,11 @@ function App() {
     }
   };
 
+  const handleEdit = ({ name, bio, id }) => {
+    setForm({ name, bio });
+    setEditId(id);
+  }
+
   return (
     <div>
       <h1>Users List</h1>
@@ -67,7 +71,7 @@ function App() {
         {users.map(({id, name, bio}) => (
           <li key={id}>
             {name} ({bio}) 
-            <button onClick={() => handleEdit(user)}>Edit</button>
+            <button onClick={() => handleEdit({id, name, bio})}>Edit</button>
             <button onClick={() => deleteUser(id)}>Delete</button>
           </li>
         ))}
