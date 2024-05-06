@@ -10,12 +10,22 @@ function App() {
     // Fetch users from the server
     axios.get('http://localhost:8000/api/users')
       .then(res => {
-        setUsers(res.data)
+        setUsers(res.data);
       })
       .catch(err => {
-        console.error('Error fetching users', err.message)
+        console.error('Error fetching users', err.message);
       });
   }, []);
+
+  const deleteUser = (id) => {
+    axios.delete(`http://localhost:8000/api/users/${id}`)
+      .then(res => {
+        setUsers(users.filter(user => user.id !== id));
+      })
+      .catch(err => {
+        console.error('Error deleting user', err.message);
+      });
+  };
 
   return (
     <div className="App">
