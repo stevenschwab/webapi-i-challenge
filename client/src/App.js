@@ -74,8 +74,10 @@ function App() {
             <div className='user-info'>
               <strong>{name}</strong> <span>({bio})</span>
             </div>
-            <button onClick={() => handleEdit({id, name, bio})}>Edit</button>
-            <button onClick={() => deleteUser(id)}>Delete</button>
+            <div className='user-buttons'>
+              <button onClick={() => handleEdit({id, name, bio})}>Edit</button>
+              <button onClick={() => deleteUser(id)}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>
