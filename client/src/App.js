@@ -94,7 +94,7 @@ function App() {
           onChange={handleInputChange}
           className='input-field'
         />
-        <button type='submit'>{editId ? 'Update' : 'Create'}</button>
+        <button type='submit' className='submit-btn'>{editId ? 'Update' : 'Create'}</button>
       </form>
     </div>
   );
