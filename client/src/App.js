@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const initialFormValues = {
+  name: '',
+  bio: '',
+}
+
 function App() {
   const [users, setUsers] = useState([]);
+  const [form, setForm] = useState(initialFormValues);
 
   useEffect(() => {
     // Fetch users from the server
