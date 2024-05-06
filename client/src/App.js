@@ -9,6 +9,7 @@ const initialFormValues = {
 function App() {
   const [users, setUsers] = useState([]);
   const [form, setForm] = useState(initialFormValues);
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     // Fetch users from the server
@@ -45,6 +46,23 @@ function App() {
           </li>
         ))}
       </ul>
+      <form>
+        <input
+          type='text'
+          name='name'
+          placeholder='Name'
+          value={form.name}
+          onChange={handleInputChange}
+        />
+        <input
+          type='text'
+          name='bio'
+          placeholder='Bio'
+          value={form.bio}
+          onChange={handleInputChange}
+        />
+        <button type='submit'>{editId ? 'Update' : 'Create'}</button>
+      </form>
     </div>
   );
 }
