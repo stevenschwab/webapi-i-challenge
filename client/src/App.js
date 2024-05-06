@@ -68,9 +68,9 @@ function App() {
   return (
     <div className='container'>
       <h1>Users List</h1>
-      <ul>
+      <ul className='user-list'>
         {users.map(({id, name, bio}) => (
-          <li key={id}>
+          <li key={id} className='user-item'>
             {name} ({bio}) 
             <button onClick={() => handleEdit({id, name, bio})}>Edit</button>
             <button onClick={() => deleteUser(id)}>Delete</button>

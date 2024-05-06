@@ -20,9 +20,22 @@ body {
   text-align: center;
 }
 
+h1 {
+  font-size: 28px;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+/* User List Styles */
+.user-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+
 
 /* Form Styles */
-
 .user-form {
   display: flex;
   justify-content: center;
