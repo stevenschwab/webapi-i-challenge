@@ -8,7 +8,7 @@ function App() {
     // Fetch users from the server
     axios.get('http://localhost:8000/api/users')
       .then(res => {
-        setUsers(res.data);
+        setUsers(res.data.users);
       })
       .catch(err => {
         console.error('Error fetching users', err.message);
@@ -28,6 +28,13 @@ function App() {
   return (
     <div>
       <h1>Users List</h1>
+      <ul>
+        {users.map(({id, name}) => (
+          <li key={id}>
+            {name} <button onClick={() => deleteUser(id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
