@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css';
 
 const initialFormValues = {
   name: '',
@@ -76,13 +77,14 @@ function App() {
           </li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="user-form">
         <input
           type='text'
           name='name'
           placeholder='Name'
           value={form.name}
           onChange={handleInputChange}
+          className='input-field'
         />
         <input
           type='text'
@@ -90,6 +92,7 @@ function App() {
           placeholder='Bio'
           value={form.bio}
           onChange={handleInputChange}
+          className='input-field'
         />
         <button type='submit'>{editId ? 'Update' : 'Create'}</button>
       </form>
