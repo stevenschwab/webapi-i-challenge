@@ -36,6 +36,30 @@ function App() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editId) {
+      axios.put(`http://localhost:8000/api/users/${editId}`, form)
+        .then(res => {
+          setUsers(users.map(user => user.id === editId ? res.data.updatedUser : user));
+          setEditId(null);
+          setForm(initialFormValues);
+        })
+        .catch(err => {
+          console.error('Error updating user', err.message);
+        })
+    } else {
+      axios.post('http://localhost:8000/api/users', form)
+        .then(res => {
+          setUsers([ ...users, res.data.user ]);
+          setForm(initialFormValues);
+        })
+        .catch(err => {
+          console.error('Error creating user', err.message);
+        })
+    }
+  };
+
   return (
     <div>
       <h1>Users List</h1>
@@ -46,7 +70,7 @@ function App() {
           </li>
         ))}
       </ul>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type='text'
           name='name'
